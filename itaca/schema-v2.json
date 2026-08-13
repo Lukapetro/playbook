@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Lukapetro/playbook/main/itaca/schema-v2.json",
+  "title": "itaca.yml v2",
+  "description": "Per-repo hot state. Hot state only: no narrative log (see journal/), no decision records (see docs/decisions/). Hard cap ~60 lines.",
+  "type": "object",
+  "required": ["version", "state", "updated"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "const": 2 },
+    "state": {
+      "type": "object",
+      "description": "The whole hot state. A fresh session reads this and nothing else.",
+      "required": ["goal", "next_safe_action"],
+      "additionalProperties": false,
+      "properties": {
+        "goal": {
+          "type": "string",
+          "description": "One line: the outcome currently pursued"
+        },
+        "doing": {
+          "type": "array",
+          "description": "Work items in flight, each with its PR reference",
+          "maxItems": 3,
+          "items": { "type": "string" }
+        },
+        "done": {
+          "type": "array",
+          "description": "Last ~5 completed items, pruned aggressively. Not a changelog.",
+          "maxItems": 5,
+          "items": { "type": "string" }
+        },
+        "blockers": {
+          "type": "array",
+          "description": "Hard blockers only: things that make the next action impossible",
+          "maxItems": 3,
+          "items": { "type": "string" }
+        },
+        "next_safe_action": {
+          "type": "string",
+          "description": "One line: the single next action that is safe to take without asking"
+        },
+        "assumptions": {
+          "type": "array",
+          "description": "Unverified assumptions that would invalidate work in flight if false",
+          "maxItems": 5,
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "decisions": {
+      "type": "string",
+      "description": "Pointer to the ADR directory; decisions never live in this file",
+      "default": "docs/decisions/"
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "board": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional tracker URL"
+        },
+        "journal": {
+          "type": "string",
+          "description": "Journal directory, conventionally journal/",
+          "default": "journal/"
+        }
+      }
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "YYYY-MM-DD, the day the state was last touched"
+    }
+  }
+}

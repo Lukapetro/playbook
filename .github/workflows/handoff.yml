@@ -1,0 +1,35 @@
+# Handoff check — copy-in GitHub Actions workflow.
+#
+# INSTALLATION IS COPY-IN, NOT WORKFLOW REUSE. Copy this file to
+# .github/workflows/handoff.yml in the target repository, together with
+# ci/check-handoff.sh. Do not try to reference it with `uses:` from another
+# repo: reusable workflows living in a *private* repository are not reliably
+# available on free plans/orgs, and a protocol check that silently stops
+# running is worse than no check. One duplicated file per repo is the price.
+#
+# Requires: ci/check-handoff.sh committed in the same repository.
+
+name: handoff
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  check-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write PR body to a file
+        # Passed through env, never interpolated into the shell: a PR body is
+        # untrusted input.
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: printf '%s\n' "$PR_BODY" > "$RUNNER_TEMP/pr-body.md"
+
+      - name: Check handoff section
+        run: bash ci/check-handoff.sh "$RUNNER_TEMP/pr-body.md"
