@@ -5,7 +5,7 @@ Closes #142.
 ## Summary
 
 Ran the gates, everything passes. Branch is `feat/importer-v2`, worktree is
-clean, nothing deviated from the work order.
+clean, nothing deviated from the ticket.
 
 ### Handoff
 

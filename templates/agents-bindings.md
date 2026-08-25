@@ -14,6 +14,16 @@ If a value is not here, it is not defined for this project.
 This project follows the [playbook protocol](https://github.com/Lukapetro/playbook).
 Values below are project-specific and override nothing in `PROTOCOL.md`.
 
+### Tracker — REQUIRED
+
+- Issues, specs and tickets: GitHub Issues of this repository, through `gh`
+  (details in `docs/agents/issue-tracker.md`, written by
+  `/setup-matt-pocock-skills`)
+- Ticket labels: `ready-for-agent` marks a ticket the frontier may dispatch;
+  `retro:spec-failure`, `retro:mismatch`, `retro:post-merge-fix` are applied by
+  `/verify-pr` only
+- Blocking: native issue dependencies
+
 ### Gates — REQUIRED
 
 Commands that must pass before a PR is opened. Run them all; report each with
@@ -30,34 +40,48 @@ its numbers under **Gates** in the handoff.
 - Gates run from: `<repo root / subdirectory>` — REQUIRED
 - Gates that may be skipped, and when: `<none>` — OPTIONAL
 
-### State file — REQUIRED
+### State — REQUIRED
 
-- Location: `itaca.yml` (repo root)
-- Format: itaca v2 — see [`itaca/SPEC-V2.md`](../itaca/SPEC-V2.md)
-- Journal: `journal/` — one file per significant session
-- Decisions: `docs/decisions/` — ADRs, append-only
-- Who updates it: the implementer, in the same PR as the work — REQUIRED
+- Hot state: `itaca.yml` at the repo root, itaca v2, under 60 lines — see
+  [`itaca/SPEC-V2.md`](https://github.com/Lukapetro/playbook/blob/main/itaca/SPEC-V2.md)
+- Vocabulary: `CONTEXT.md` at the repo root, glossary only
+- Decisions: `docs/adr/`, one file per hard-to-reverse decision
+- Who updates `itaca.yml`: the implementer, in the same PR as the work
 
 ### Reviewer chain — REQUIRED
 
-Reviewers run in this order before the PR is opened; findings are reported per
-reviewer under **Review** in the handoff.
+Reviewers run on the PR before it is declared ready; findings are reported per
+reviewer under **Review** in the handoff. `/code-review` (Standards + Spec)
+always runs first, locally, before the push.
 
-1. `<reviewer / command / agent>` — <what it covers>
-2. `<reviewer / command / agent>` — <what it covers>
+1. `<reviewer / bot>` — <what it covers>
+2. `<reviewer / bot>` — <what it covers>
 
 - Re-review required after the last commit: yes / no — REQUIRED
 - Human reviewer: `<name>` — OPTIONAL
 
-### Commit and push authorization — REQUIRED
+### Standing rules for implementers — REQUIRED
+
+These hold for every ticket and are never repeated in a ticket.
 
 - Branch naming: `<pattern>`
 - Commit titles: `<convention>`
 - Attribution footers/trailers: `<allowed / forbidden>`
+- Commits reference the ticket: `Closes #<n>` in the PR body — REQUIRED
 - May the implementer push without asking: yes / no
 - May the implementer open the PR: yes / no
 - May the implementer force-push: `<no / only to its own branch before review>`
 - Base branch: `<main>`
+- Not authorized unless a ticket names it: merging, deploying, rewriting
+  published history, adding dependencies, creating remote resources, touching
+  other repositories
+- If the evidence contradicts the ticket — the repository is not in the state
+  described, a command does not exist, an instruction is impossible or
+  self-contradictory — stop and report in the handoff. Do not silently adapt.
+  If a design decision outside the ticket is required, report back. Do not
+  improvise.
+- The PR body ends with `## Handoff`, seven fields, skeleton in
+  `docs/protocol/handoff.md`
 
 ### Language conventions — REQUIRED
 
@@ -71,9 +95,3 @@ reviewer under **Review** in the handoff.
 - Who merges: `<name / role>` — never the implementer unless stated here
 - Merge method: `<squash / merge / rebase>`
 - Required checks before merge: `<list>`
-
-### Board — OPTIONAL
-
-- Tracker: `<Linear / GitHub Projects / none>`
-- Project or team: `<link>`
-- Issue reference required in the PR title: yes / no

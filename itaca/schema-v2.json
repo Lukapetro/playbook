@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/Lukapetro/playbook/main/itaca/schema-v2.json",
   "title": "itaca.yml v2",
-  "description": "Per-repo hot state. Hot state only: no narrative log (see journal/), no decision records (see docs/decisions/). Hard cap ~60 lines.",
+  "description": "Per-repo hot state. Hot state only: the plan lives in the tracker, decisions in docs/adr/, vocabulary in CONTEXT.md, session records in PR bodies. Hard cap 60 lines, enforced by ci/check-itaca.sh.",
   "type": "object",
   "required": ["version", "state", "updated"],
   "additionalProperties": false,
@@ -20,14 +20,8 @@
         },
         "doing": {
           "type": "array",
-          "description": "Work items in flight, each with its PR reference",
+          "description": "Work items in flight, each with its ticket or PR reference",
           "maxItems": 3,
-          "items": { "type": "string" }
-        },
-        "done": {
-          "type": "array",
-          "description": "Last ~5 completed items, pruned aggressively. Not a changelog.",
-          "maxItems": 5,
           "items": { "type": "string" }
         },
         "blockers": {
@@ -45,27 +39,6 @@
           "description": "Unverified assumptions that would invalidate work in flight if false",
           "maxItems": 5,
           "items": { "type": "string" }
-        }
-      }
-    },
-    "decisions": {
-      "type": "string",
-      "description": "Pointer to the ADR directory; decisions never live in this file",
-      "default": "docs/decisions/"
-    },
-    "links": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "board": {
-          "type": "string",
-          "format": "uri",
-          "description": "Optional tracker URL"
-        },
-        "journal": {
-          "type": "string",
-          "description": "Journal directory, conventionally journal/",
-          "default": "journal/"
         }
       }
     },

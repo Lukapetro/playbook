@@ -34,7 +34,7 @@ to stay verifiable inside the project. Skip them and the workflow still works.
 
 ```bash
 mkdir -p docs/protocol
-cp "$PLAYBOOK/templates/work-order.md" docs/protocol/
+cp "$PLAYBOOK/templates/ticket.md" docs/protocol/
 cp "$PLAYBOOK/templates/handoff.md" docs/protocol/
 ```
 
@@ -58,11 +58,7 @@ Sanity check before moving on: run each gate command exactly as written, from
 the directory the block says to run it from. A gate command that does not run
 copy-pasted is a bug in the bindings, and it will surface as a false handoff.
 
-## 4. Create the state files (2 min)
-
-```bash
-mkdir -p journal docs/decisions
-```
+## 4. Create the state file (1 min)
 
 Create `itaca.yml` at the repo root:
 
@@ -71,40 +67,27 @@ version: 2
 state:
   goal: <the outcome currently pursued, one line>
   doing: []
-  done: []
   blockers: []
   next_safe_action: <the single next action that is safe to take>
   assumptions: []
-decisions: docs/decisions/
-links:
-  journal: journal/
 updated: <YYYY-MM-DD>
 ```
 
-Rules that matter from day one: hot state only, hard cap ~60 lines, no prose
-log. Full field reference in [`itaca/SPEC-V2.md`](itaca/SPEC-V2.md); schema in
-[`itaca/schema-v2.json`](itaca/schema-v2.json).
+Rules that matter from day one: hot state only, hard cap 60 lines, no log, no
+backlog. Full field reference in [`itaca/SPEC-V2.md`](itaca/SPEC-V2.md);
+schema in [`itaca/schema-v2.json`](itaca/schema-v2.json). `CONTEXT.md` and
+`docs/adr/` are created lazily by the first shaping session that has something
+to write in them.
 
-Migrating a project that already has an itaca v1 file? Follow
-[`itaca/SPEC-V2.md`](itaca/SPEC-V2.md) §4 — it is a mechanical mapping plus one
-pass to extract decisions into ADRs.
+Migrating a project that already has an itaca v1 file, or a first-v2 file with
+a journal? Follow [`itaca/SPEC-V2.md`](itaca/SPEC-V2.md) §3.
 
-## 5. Board link (1 min, optional)
-
-If the project is tracked on Linear or another board, add it in two places:
-
-- `itaca.yml` → `links.board`
-- the bindings block → **Board** section
-
-Skip entirely if there is no board. An empty pointer is worse than no pointer.
-
-## 6. Verify
+## 5. Verify
 
 - [ ] `bash ci/test-check-handoff.sh` → 6 passed, 0 failed
 - [ ] every REQUIRED bindings field filled; every unused OPTIONAL one deleted
 - [ ] every gate command runs copy-pasted, from the stated directory
 - [ ] `itaca.yml` is valid YAML, under 60 lines, `version: 2`
-- [ ] `journal/` and `docs/decisions/` exist and are committed
 - [ ] the first PR after this one carries a `## Handoff` section and the
       `handoff` check goes green
 
