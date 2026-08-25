@@ -124,4 +124,4 @@ reference implementation is [Lukapetro/itaca](https://github.com/Lukapetro/itaca
 | `itaca context` | Print hot state as compact text on stdout. Intended for a `SessionStart` hook, so an agent opens a fresh session already knowing `goal`, `doing`, `blockers`, `next_safe_action`, `assumptions`. Exit non-zero if `itaca.yml` is missing or not v2. |
 | `itaca check` | Same checks as `ci/check-itaca.sh`, for a `Stop` hook. |
 | `itaca handoff` | Print the `## Handoff` skeleton on stdout, seven fields, ready to paste into a PR body. |
-| `itaca init-protocol` | Scaffold the playbook files into a repository: `ci/check-handoff.sh`, `ci/check-itaca.sh`, `.github/workflows/protocol.yml`, an empty `itaca.yml` v2, `docs/protocol/`, and the bindings block appended to `AGENTS.md`. Idempotent on the `## Agent protocol bindings` heading. |
+| `itaca init-protocol` | What `install.sh` in the playbook does, from the CLI: checks, workflow, labels, `docs/agents/`, the two `AGENTS.md` blocks, an empty `itaca.yml` v2. Idempotent on the block headings. |

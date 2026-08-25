@@ -59,7 +59,8 @@ no session starts by pasting context.
 /to-tickets           the spec becomes tickets with blocking edges
 ```
 
-Before closing: read each ticket against `docs/protocol/ticket.md`. Runnable
+Before closing: read each ticket against
+[`templates/ticket.md`](templates/ticket.md). Runnable
 **Done when**, named **Forbidden actions**, then the `ready-for-agent` label.
 The glossary (`CONTEXT.md`) and the decisions (`docs/adr/`) were written while
 you were answering; you did not have to.
@@ -158,7 +159,8 @@ Start with `/wait-what`.
 | Path | What it is |
 | --- | --- |
 | [`PROTOCOL.md`](PROTOCOL.md) | The invariants. Read this first. |
-| [`INSTALL.md`](INSTALL.md) | Installing the protocol on a project. |
+| [`INSTALL.md`](INSTALL.md) | Installing the skills on a machine and the protocol on a project. |
+| [`install.sh`](install.sh) | The per-project install, one command, idempotent. |
 | [`templates/ticket.md`](templates/ticket.md) | Paste-ready ticket body, five sections. |
 | [`templates/handoff.md`](templates/handoff.md) | Paste-ready `## Handoff` PR section, seven fields. |
 | [`templates/agents-bindings.md`](templates/agents-bindings.md) | The per-project block for `AGENTS.md`. |
@@ -174,8 +176,8 @@ Start with `/wait-what`.
 
 ## Scope
 
-Documents, skills as Markdown files, two bash checks, one JSON Schema, one
-workflow file. No dependencies beyond `gh` and a `python3` with PyYAML for the
+Documents, skills as Markdown files, one install script, two bash checks, one
+JSON Schema, one workflow file. No dependencies beyond `gh` and a `python3` with PyYAML for the
 state check; no build step, no package manager.
 
 The itaca CLI described in [`SPEC-V2.md`](itaca/SPEC-V2.md) §4 is **specified

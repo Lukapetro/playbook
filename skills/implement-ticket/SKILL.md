@@ -79,8 +79,7 @@ Push. Open the PR against the base branch with:
 - `Closes #<n>`,
 - the `## Handoff` section: seven fields, all present, numbers not
   adjectives, Review distinguishing founded from unfounded, Deviations
-  naming every departure from the ticket. Skeleton in
-  `docs/protocol/handoff.md` if the project carries it, otherwise in
+  naming every departure from the ticket. Skeleton:
   [templates/handoff.md](https://github.com/Lukapetro/playbook/blob/main/templates/handoff.md).
 
 Stop when the PR is open and its checks are green. Report the PR URL and the

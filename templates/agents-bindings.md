@@ -81,7 +81,7 @@ These hold for every ticket and are never repeated in a ticket.
   If a design decision outside the ticket is required, report back. Do not
   improvise.
 - The PR body ends with `## Handoff`, seven fields, skeleton in
-  `docs/protocol/handoff.md`
+  [`templates/handoff.md`](https://github.com/Lukapetro/playbook/blob/main/templates/handoff.md)
 
 ### Language conventions — REQUIRED
 
