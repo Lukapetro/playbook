@@ -45,6 +45,65 @@ PR. One home per fact.
 Protocol tells the agent how to work. Skills make it do so. Bindings tell it
 how to work *here*. itaca tells it where things stand.
 
+## Day to day
+
+One loop, three kinds of session. Everything you type is a slash command;
+everything the agent needs is already in the repository or on the tracker, so
+no session starts by pasting context.
+
+**1. Shape** — you and the agent, one session, one idea.
+
+```
+/grill-with-docs      describe the idea; answer each round by number ("Q1 yes, Q2 the second option")
+/to-spec              the conversation becomes one issue
+/to-tickets           the spec becomes tickets with blocking edges
+```
+
+Before closing: read each ticket against `docs/protocol/ticket.md`. Runnable
+**Done when**, named **Forbidden actions**, then the `ready-for-agent` label.
+The glossary (`CONTEXT.md`) and the decisions (`docs/adr/`) were written while
+you were answering; you did not have to.
+
+**2. Implement** — the agent alone, a fresh session per ticket.
+
+```
+/implement-ticket <issue url>     builds test-first, runs the gates, simplifies, reviews, opens the PR
+/fix-bugbot <pr>                  only if the review bots left findings
+/clear                            the ticket is done; nothing here matters to the next one
+```
+
+**3. Verify and merge** — you and the agent.
+
+```
+/verify-pr <pr>       re-runs the gates on that SHA, reads the diff against the ticket, labels, verdict
+```
+
+Then you merge. The next session opens on `itaca context`: `next_safe_action`
+names the next frontier ticket (back to 2) or the next patch of fog (back
+to 1).
+
+Every ten merged PRs: `bash scripts/retro.sh`. The number that rises names
+the rung to climb; nothing else changes the protocol.
+
+### When something else happens
+
+| Situation | Type |
+| --- | --- |
+| A hard bug, a flake, a regression | `/diagnosing-bugs` |
+| A design question that needs running code to answer | `/prototype` |
+| Reading legwork you want done while you keep working | `/research` |
+| The agent's last message did not land | `/wait-what` |
+| Moving this work to another machine, harness or person | `/handoff` |
+| A fuzzy term, or a decision worth an ADR, outside a shaping session | `/domain-modeling` |
+| A merge or rebase conflict | `/resolving-merge-conflicts` |
+| Nothing fits | `/ask-matt` |
+
+### Three things you never do
+
+- Paste a ticket into a prompt. The ticket URL is the prompt.
+- Merge from an agent session. The agent stops at "PR open and green".
+- Let a session hold the plan. It lives on the tracker; `itaca.yml` says only what is next.
+
 ## Contents
 
 | Path | What it is |
