@@ -22,15 +22,16 @@ string and for all seven field labels. Every field is required; `nothing` and
 
 **Review:**
 
-- <reviewer>: <finding> — founded / unfounded — <how it was closed>
+- code-review / Standards: <finding> — founded / unfounded — <how it was closed>
+- code-review / Spec: <finding> — founded / unfounded — <how it was closed>
 - <reviewer>: <finding> — founded / unfounded — <how it was closed>
 - Final SHA covered by review: yes / no (<SHA>)
 
 **Discoveries:** <out-of-scope findings, as backlog candidates — not fixed
 here>, or `none`
 
-**Deviations:** <every departure from the work order, with the reason>, or
+**Deviations:** <every departure from the ticket, with the reason>, or
 `none`
 
-**State left:** branch `<name>`; state file updated: yes / no; worktree clean:
+**State left:** branch `<name>`; `itaca.yml` updated: yes / no; worktree clean:
 yes / no
