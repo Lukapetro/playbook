@@ -93,65 +93,65 @@ the rung to climb; nothing else changes the protocol.
 
 ## Skills, by when you reach for them
 
-Two sets, one machine install ([`INSTALL.md`](INSTALL.md) §A). Skills marked
-**·p** come from the `mattpocock-skills` plugin, **·k** from this repository.
-Most days start with the main flow.
+Two sets, one machine install ([`INSTALL.md`](INSTALL.md) §A): the
+`mattpocock-skills` plugin, and this repository's `skills/`. Most days start
+with the main flow.
 
 **01 Getting started** — once per repo, then whenever you are lost.
 Start with `/setup-matt-pocock-skills`.
 
-| | |
-| --- | --- |
-| `/setup-matt-pocock-skills` ·p | Set up one repo so the other skills know how it works: GitHub as tracker, labels, glossary layout. |
-| `/ask-matt` ·p | Find out which skill fits the situation you are in. |
+| Skill | From | What it does |
+| --- | --- | --- |
+| `/setup-matt-pocock-skills` | plugin | Set up one repo so the other skills know how it works: GitHub as tracker, labels, glossary layout. |
+| `/ask-matt` | plugin | Find out which skill fits the situation you are in. |
 
 **02 The main flow** — the idea → merge spine, in order.
 Start with `/grill-with-docs`.
 
-| | |
-| --- | --- |
-| `/grill-with-docs` ·p | Get interviewed about the idea, in rounds; the glossary and the decisions get written as you answer. |
-| `/to-spec` ·p | Turn the agreed conversation into one spec issue. |
-| `/to-tickets` ·p | Split the spec into tickets an agent can build, each declaring what blocks it. |
-| `/implement-ticket` ·k | Build one ticket in a fresh session, test-first, through the gates, into a PR with a handoff. |
-| `/verify-pr` ·k | Re-run the gates on that PR, read the diff against the ticket, label, leave the verdict. |
+| Skill | From | What it does |
+| --- | --- | --- |
+| `/grill-with-docs` | plugin | Get interviewed about the idea, in rounds; the glossary and the decisions get written as you answer. |
+| `/to-spec` | plugin | Turn the agreed conversation into one spec issue. |
+| `/to-tickets` | plugin | Split the spec into tickets an agent can build, each declaring what blocks it. |
+| `/implement-ticket` | playbook | Build one ticket in a fresh session, test-first, through the gates, into a PR with a handoff. |
+| `/verify-pr` | playbook | Re-run the gates on that PR, read the diff against the ticket, label, leave the verdict. |
 
 **03 Shaping** — answer an open question so the flow can continue.
 Start with `/prototype`.
 
-| | |
-| --- | --- |
-| `/prototype` ·p | Answer a design question with code you then delete. |
-| `/research` ·p | Get a cited answer from primary sources, read by a background agent while you keep working. |
+| Skill | From | What it does |
+| --- | --- | --- |
+| `/prototype` | plugin | Answer a design question with code you then delete. |
+| `/research` | plugin | Get a cited answer from primary sources, read by a background agent while you keep working. |
 
 **04 Upkeep** — when something is broken or stuck.
 Start with `/diagnosing-bugs`.
 
-| | |
-| --- | --- |
-| `/diagnosing-bugs` ·p | A hard bug, a flake, a regression: build a loop that goes red first, then fix. |
-| `/fix-bugbot` ·k | Verify the review bots' findings on a PR, fix the real ones, reply on each thread. |
-| `/resolving-merge-conflicts` ·p | Resolve a merge or rebase conflict hunk by hunk, by intent. |
-| `bash scripts/retro.sh` ·k | Every ten merged PRs: the four numbers that say whether the protocol is failing. |
+| Skill | From | What it does |
+| --- | --- | --- |
+| `/diagnosing-bugs` | plugin | A hard bug, a flake, a regression: build a loop that goes red first, then fix. |
+| `/fix-bugbot` | playbook | Verify the review bots' findings on a PR, fix the real ones, reply on each thread. |
+| `/resolving-merge-conflicts` | plugin | Resolve a merge or rebase conflict hunk by hunk, by intent. |
+| `bash scripts/retro.sh` | playbook | Every ten merged PRs: the four numbers that say whether the protocol is failing. |
 
 **05 Productivity** — session hygiene.
 Start with `/wait-what`.
 
-| | |
-| --- | --- |
-| `/wait-what` ·p | The last message did not land: get it re-pitched in plain words. |
-| `/handoff` ·p | Move the work to another machine, harness or person. Only when something travels. |
+| Skill | From | What it does |
+| --- | --- | --- |
+| `/wait-what` | plugin | The last message did not land: get it re-pitched in plain words. |
+| `/handoff` | plugin | Move the work to another machine, harness or person. Only when something travels. |
 
 **06 Reference** — the agent reaches for these on its own; you can too.
 
-| | |
-| --- | --- |
-| `/grilling` ·p | The interview itself, with no wrapper around it. |
-| `/domain-modeling` ·p | Sharpen a term, record a decision in `docs/adr/`, keep `CONTEXT.md` a glossary. |
-| `/codebase-design` ·p | The deep-module vocabulary: module, interface, seam, depth. |
-| `/tdd` ·p | Red, green, one slice at a time, only at agreed seams. |
-| `/simplify` ·k | The pass over the whole diff before the push. |
-| `/writing-for-agents` ·p | How to write skills, `AGENTS.md` and any doc an agent reads. |
+| Skill | From | What it does |
+| --- | --- | --- |
+| `/grilling` | plugin | The interview itself, with no wrapper around it. |
+| `/domain-modeling` | plugin | Sharpen a term, record a decision in `docs/adr/`, keep `CONTEXT.md` a glossary. |
+| `/codebase-design` | plugin | The deep-module vocabulary: module, interface, seam, depth. |
+| `/tdd` | plugin | Red, green, one slice at a time, only at agreed seams. |
+| `/simplify` | playbook | The pass over the whole diff before the push. |
+| `/writing-for-agents` | plugin | How to write skills, `AGENTS.md` and any doc an agent reads. |
 
 ## Contents
 
