@@ -1,0 +1,5 @@
+version: 2
+state:
+  goal: First release
+  next_safe_action: Open a shaping session for the importer
+updated: 2026-08-25

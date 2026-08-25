@@ -1,0 +1,10 @@
+version: 2
+state:
+  goal: Ship the v2 importer behind a flag
+  doing:
+    - Importer CSV parser — #142
+  blockers: []
+  next_safe_action: Dispatch #147 (parser timings on fixtures/large.csv)
+  assumptions:
+    - Source files are always UTF-8; unverified against customer exports
+updated: 2026-08-25

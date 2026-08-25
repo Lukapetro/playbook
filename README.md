@@ -56,15 +56,19 @@ how to work *here*. itaca tells it where things stand.
 | [`templates/agents-bindings.md`](templates/agents-bindings.md) | The per-project block for `AGENTS.md`. |
 | [`itaca/SPEC-V2.md`](itaca/SPEC-V2.md) | itaca v2: state file, where everything else lives, migration, CLI. |
 | [`itaca/schema-v2.json`](itaca/schema-v2.json) | JSON Schema for `itaca.yml` v2. |
+| [`skills/`](skills/) | `implement-ticket`, `verify-pr`, `simplify`, `fix-bugbot`. Installed with `npx skills add Lukapetro/playbook`. |
+| [`scripts/retro.sh`](scripts/retro.sh) | The four retro metrics over the last N merged PRs. |
 | [`ci/check-handoff.sh`](ci/check-handoff.sh) | Dependency-free check: PR body carries a conforming handoff. |
-| [`ci/handoff.yml`](ci/handoff.yml) | Copy-in GitHub Actions workflow that runs the check. |
-| [`ci/fixtures/`](ci/fixtures/) | Passing and failing PR bodies. |
-| [`ci/test-check-handoff.sh`](ci/test-check-handoff.sh) | Test runner for the check. |
+| [`ci/check-itaca.sh`](ci/check-itaca.sh) | Check: `itaca.yml` is v2, under 60 lines, within caps. |
+| [`ci/protocol.yml`](ci/protocol.yml) | Copy-in GitHub Actions workflow that runs both checks. |
+| [`ci/fixtures/`](ci/fixtures/) | Passing and failing PR bodies and state files. |
+| [`ci/test-check-handoff.sh`](ci/test-check-handoff.sh), [`ci/test-check-itaca.sh`](ci/test-check-itaca.sh) | Test runners for the checks. |
 
 ## Scope
 
-Documents, skills as Markdown files, bash checks, one JSON Schema, one workflow
-file. No dependencies, no build step, no package manager.
+Documents, skills as Markdown files, two bash checks, one JSON Schema, one
+workflow file. No dependencies beyond `gh` and a `python3` with PyYAML for the
+state check; no build step, no package manager.
 
 The itaca CLI described in [`SPEC-V2.md`](itaca/SPEC-V2.md) §4 is **specified
 here, implemented elsewhere**.
@@ -72,7 +76,7 @@ here, implemented elsewhere**.
 ## Using it
 
 ```bash
-bash ci/test-check-handoff.sh   # verify the CI check still works
+bash ci/test-check-handoff.sh && bash ci/test-check-itaca.sh   # verify the CI checks still work
 ```
 
 To install on a project, follow [`INSTALL.md`](INSTALL.md).

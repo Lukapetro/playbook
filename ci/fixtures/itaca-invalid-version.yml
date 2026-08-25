@@ -1,0 +1,5 @@
+version: 1
+status:
+  phase: Bulk exports merged
+  next: Verify the cron
+  updated: 2026-08-10
