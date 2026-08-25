@@ -1,0 +1,34 @@
+# This repository's own CI: the copy-in checks must keep working, and this
+# repository's PRs carry a handoff like any other.
+
+name: protocol
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Check scripts pass their fixtures
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash ci/test-check-handoff.sh
+      - run: bash ci/test-check-itaca.sh
+
+  handoff:
+    name: Handoff section in the PR body
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write PR body to a file
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: printf '%s\n' "$PR_BODY" > "$RUNNER_TEMP/pr-body.md"
+
+      - name: Check handoff section
+        run: bash ci/check-handoff.sh "$RUNNER_TEMP/pr-body.md"

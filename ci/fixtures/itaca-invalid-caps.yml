@@ -1,0 +1,18 @@
+version: 2
+state:
+  goal: Ship the v2 importer behind a flag
+  doing:
+    - one
+    - two
+    - three
+    - four
+  blockers: []
+  next_safe_action: Dispatch #147
+  assumptions:
+    - a
+    - b
+    - c
+    - d
+    - e
+    - f
+updated: 2026-08-25

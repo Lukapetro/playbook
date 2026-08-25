@@ -1,0 +1,10 @@
+version: 2
+state:
+  goal: Ship the v2 importer behind a flag
+  done:
+    - Schema migration landed — PR #138
+  next_safe_action: Dispatch #147
+decisions: docs/decisions/
+links:
+  journal: journal/
+updated: 2026-08-25
